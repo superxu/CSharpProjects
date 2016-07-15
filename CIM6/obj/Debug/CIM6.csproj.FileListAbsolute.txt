@@ -1,0 +1,15 @@
+c:\users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\bin\Debug\CIM6.exe.config
+c:\users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\bin\Debug\CIM6.exe
+c:\users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\bin\Debug\CIM6.pdb
+c:\users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\obj\Debug\CIM6.Form1.resources
+c:\users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\obj\Debug\CIM6.Properties.Resources.resources
+c:\users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\obj\Debug\CIM6.csproj.GenerateResource.Cache
+c:\users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\obj\Debug\CIM6.exe
+c:\users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\obj\Debug\CIM6.pdb
+c:\users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\obj\Debug\CIM6.csprojResolveAssemblyReference.cache
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\obj\Debug\CIM6.EditCigaretteName.resources
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\bin\Debug\Cigarettes.mdf
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\bin\Debug\Cigarettes_log.ldf
+C:\CSharpProjects\CIM6\CIM6\bin\Debug\CIM6.exe.config
+C:\CSharpProjects\CIM6\CIM6\obj\Debug\CIM6.exe
+C:\CSharpProjects\CIM6\CIM6\obj\Debug\CIM6.pdb

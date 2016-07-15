@@ -1,0 +1,11 @@
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\bin\Release\CIM6.exe.config
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\bin\Release\Cigarettes.mdf
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\bin\Release\Cigarettes_log.ldf
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\bin\Release\CIM6.exe
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\bin\Release\CIM6.pdb
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\obj\Release\CIM6.EditCigaretteName.resources
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\obj\Release\CIM6.Form1.resources
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\obj\Release\CIM6.Properties.Resources.resources
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\obj\Release\CIM6.csproj.GenerateResource.Cache
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\obj\Release\CIM6.exe
+C:\Users\徐树鹏\documents\visual studio 2015\Projects\CIM6\CIM6\obj\Release\CIM6.pdb
