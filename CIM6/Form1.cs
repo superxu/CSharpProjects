@@ -13,6 +13,7 @@ namespace CIM6
     {
         public int labelid { get; private set; }
         public Dictionary<int, string> CigarettePosDict = new Dictionary<int, string>();
+        public Dictionary<int, int> CigaretteNumDict = new Dictionary<int, int>();
 
         public Form1()
         {
@@ -21,7 +22,107 @@ namespace CIM6
             conn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Cigarettes.mdf;Integrated Security=True";
 
             SetLabelText(this.tableLayoutPanel1);
+            SetTextBoxNum(this.tableLayoutPanel1);
         }
+
+        private void GetCigaretteNum()
+        {
+
+            SqlDataReader rdr = null;
+            int pos = 0;
+            int num = 0;
+
+            try
+            {
+                // 2. Open the connection
+                conn.Open();
+
+                // 3. Pass the connection to a command object
+                SqlCommand cmd = new SqlCommand("select * from CigaretteInventory", conn);
+
+                //
+                // 4. Use the connection
+                //
+
+                // get query results
+                rdr = cmd.ExecuteReader();
+
+
+                while (rdr.Read())
+                {
+                    // Console.WriteLine("Output is: {0} {1} {2} {3}", rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetInt32(3));
+
+                    pos = rdr.GetInt32(4);
+                    num = rdr.GetInt32(3);
+
+                    if (!CigaretteNumDict.ContainsKey(pos))
+                    {
+                        CigaretteNumDict.Add(pos, num);
+                    }
+                    else //update key value
+                    {
+                        CigaretteNumDict[pos] = num;
+                    }
+                }
+            }
+            finally
+            {
+                // close the reader
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+
+                // 5. Close the connection
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+        }
+
+
+        public void SetTextBoxNum(Control control)
+        {
+
+            int textboxid = 0;
+            string namestr;
+
+            this.GetCigaretteNum();
+
+
+            foreach (var pair in CigaretteNumDict)
+            {
+                Console.WriteLine("Pos = {0}, Num = {1}", pair.Key, pair.Value);
+            }
+
+            foreach (Control child in control.Controls)
+            {
+                if (child is TextBox)
+                {
+                    TextBox tb = (TextBox)child;
+                    if (tb.Name.StartsWith("textBox"))
+                    {
+                        namestr = tb.Name.Replace("textBox", "");
+
+
+                        if (Int32.TryParse(namestr, out textboxid))
+                        {
+                            // Console.WriteLine("label id = {0}", labelid);
+                            tb.Text = CigaretteNumDict[textboxid].ToString();
+
+                        }
+
+
+                    }
+                }
+
+            }
+
+        }
+
+
         public void SetLabelText(Control control)
         {
             
@@ -68,6 +169,7 @@ namespace CIM6
 
             SqlDataReader rdr = null;
             int pos = 0;
+            string cigarettename;
 
             try
             {
@@ -90,14 +192,16 @@ namespace CIM6
                     // Console.WriteLine("Output is: {0} {1} {2} {3}", rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetInt32(3));
  
                     pos = rdr.GetInt32(4);
+                    cigarettename = rdr.GetString(2);
+
 
                     if (!CigarettePosDict.ContainsKey(pos))
                     {
-                        CigarettePosDict.Add(pos, rdr["CigaretteName"].ToString());
+                        CigarettePosDict.Add(pos, cigarettename);
                     }
                     else //update key value
                     {
-                        CigarettePosDict[pos] = rdr["CigaretteName"].ToString();
+                        CigarettePosDict[pos] = cigarettename;
                     }
                 }
             }
