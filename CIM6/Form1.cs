@@ -12,12 +12,16 @@ namespace CIM6
     public partial class Form1 : Form
     {
         public int labelid { get; private set; }
+        public bool savechages { get; set; }
+
         public Dictionary<int, string> CigarettePosDict = new Dictionary<int, string>();
         public Dictionary<int, int> CigaretteNumDict = new Dictionary<int, int>();
+        public Dictionary<int, int> CigaretteNumDictSave = new Dictionary<int, int>();
 
         public Form1()
         {
             InitializeComponent();
+            this.FormClosing += Form1_FormClosing;
             // 1. set the connection string
             conn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Cigarettes.mdf;Integrated Security=True";
 
@@ -25,7 +29,7 @@ namespace CIM6
             SetTextBoxNum(this.tableLayoutPanel1);
         }
 
-        private void GetCigaretteNum()
+        private void GetCigaretteNumFromDB()
         {
 
             SqlDataReader rdr = null;
@@ -82,20 +86,43 @@ namespace CIM6
 
         }
 
+        private void GetTextBoxBum(Control control)
+        {
+            string namestr;
+            int textid;
 
-        public void SetTextBoxNum(Control control)
+            foreach (Control child in control.Controls)
+            {
+                if (child is TextBox)
+                {
+                    TextBox tb = (TextBox)child;
+                    if (tb.Name.StartsWith("textBox"))
+                    {
+                        namestr = tb.Name.Replace("textBox", "");
+
+                        if (Int32.TryParse(namestr, out textid))
+                        {
+                            // Console.WriteLine("label id = {0}", labelid);
+                            CigaretteNumDictSave[textid] = Int32.Parse(tb.Text);
+                           // Console.WriteLine("Updated Cigarette Num = {0}", CigaretteNumDictSave[textid]);
+
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+
+        private void SetTextBoxNum(Control control)
         {
 
             int textboxid = 0;
             string namestr;
 
-            this.GetCigaretteNum();
+            this.GetCigaretteNumFromDB();
 
-
-            foreach (var pair in CigaretteNumDict)
-            {
-                Console.WriteLine("Pos = {0}, Num = {1}", pair.Key, pair.Value);
-            }
 
             foreach (Control child in control.Controls)
             {
@@ -111,6 +138,7 @@ namespace CIM6
                         {
                             // Console.WriteLine("label id = {0}", labelid);
                             tb.Text = CigaretteNumDict[textboxid].ToString();
+                            this.is_shortage(tb, CigaretteNumDict[textboxid]);
 
                         }
 
@@ -131,11 +159,6 @@ namespace CIM6
 
             this.GetCigaretteName();
 
-   
-            foreach (var pair in CigarettePosDict)
-            {
-                Console.WriteLine("Pos = {0}, CigaretteName = {1}", pair.Key, pair.Value);
-            }
 
             foreach (Control child in control.Controls)
             {
@@ -153,8 +176,6 @@ namespace CIM6
                             lbl.Text = CigarettePosDict[labelid];
             
                         }
-
- 
                     }
                 }
 
@@ -246,6 +267,7 @@ namespace CIM6
 
         }
 
+
         private void button_Clicked(object sender, EventArgs e)
         {
             Button thebutton = (Button)sender;
@@ -268,7 +290,6 @@ namespace CIM6
                         row = (button_id / buttonsperrow) * 2 + 1;
                         Console.WriteLine("column = {0}", column);
                         thebox = (TextBox)this.tableLayoutPanel1.GetControlFromPosition(column, row);
-                       
 
                         if (Int32.TryParse(thebox.Text, out cigarettes))
                         {
@@ -328,6 +349,71 @@ namespace CIM6
 
             this.SetLabelText(this.tableLayoutPanel1);
             this.Show();
+        }
+
+        private void Form1_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+            if (!this.savechages)
+            {
+                savechagestodb();
+            }
+
+        }
+
+
+        private void savechagestodb()
+        {
+            this.GetTextBoxBum(this.tableLayoutPanel1);
+
+            try
+            {
+                // 2. Open the connection
+                conn.Open();
+
+                foreach (var pair in CigaretteNumDictSave)
+                {
+                  //  Console.WriteLine("Pos = {0}, Num = {1}", pair.Key, pair.Value);
+
+                    // 3. Pass the connection to a command object
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = conn;
+                    string cmdstring = "UPDATE CigaretteInventory SET CigaretteNum='" + pair.Value + "'  WHERE CigarettePos=" + pair.Key + " ";
+                    //MessageBox.Show(cmdstring);
+                    cmd.CommandText = cmdstring;
+
+                    //
+                    // 4. Use the connection
+                    //
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+            finally
+            {
+
+                // 5. Close the connection
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+    
+            ConfirmSave save = new ConfirmSave(this);
+            save.ShowDialog();
+
+            this.Show();
+            Console.WriteLine("Save changes: {0}", this.savechages);
+            if (this.savechages)
+            {
+                savechagestodb();
+            }
+           
         }
     }
 }

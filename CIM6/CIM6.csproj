@@ -66,6 +66,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CigarettesDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ConfirmSave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfirmSave.Designer.cs">
+      <DependentUpon>ConfirmSave.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditCigaretteName.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ConfirmSave.resx">
+      <DependentUpon>ConfirmSave.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditCigaretteName.resx">
       <DependentUpon>EditCigaretteName.cs</DependentUpon>
     </EmbeddedResource>
