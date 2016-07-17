@@ -23,3 +23,8 @@ C:\CSharpProjects\CIM6\CIM6\obj\Debug\CIM6.Form1.resources
 C:\CSharpProjects\CIM6\CIM6\obj\Debug\CIM6.Properties.Resources.resources
 C:\CSharpProjects\CIM6\CIM6\obj\Debug\CIM6.csproj.GenerateResource.Cache
 C:\CSharpProjects\CIM6\CIM6\obj\Debug\CIM6.ConfirmSave.resources
+C:\CSharpProjects\CIM6\CIM6\obj\Debug\CIM6.csproj.ResolveComReference.cache
+C:\CSharpProjects\CIM6\CIM6\bin\Debug\itextsharp.dll
+C:\CSharpProjects\CIM6\CIM6\bin\Debug\itextsharp.pdfa.dll
+C:\CSharpProjects\CIM6\CIM6\bin\Debug\itextsharp.xtra.dll
+C:\CSharpProjects\CIM6\CIM6\bin\Debug\itextsharp.xml

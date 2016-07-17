@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
+using System.Data;
+using iTextSharp.text.html.simpleparser;
 
 namespace CIM6
 {
@@ -17,6 +22,7 @@ namespace CIM6
         public Dictionary<int, string> CigarettePosDict = new Dictionary<int, string>();
         public Dictionary<int, int> CigaretteNumDict = new Dictionary<int, int>();
         public Dictionary<int, int> CigaretteNumDictSave = new Dictionary<int, int>();
+        public Dictionary<string, int> CigaretteNameNum = new Dictionary<string, int>();
 
         public Form1()
         {
@@ -29,12 +35,15 @@ namespace CIM6
             SetTextBoxNum(this.tableLayoutPanel1);
         }
 
+
+
         private void GetCigaretteNumFromDB()
         {
 
             SqlDataReader rdr = null;
             int pos = 0;
             int num = 0;
+            string name;
 
             try
             {
@@ -58,6 +67,7 @@ namespace CIM6
 
                     pos = rdr.GetInt32(4);
                     num = rdr.GetInt32(3);
+                    name = rdr.GetString(2);
 
                     if (!CigaretteNumDict.ContainsKey(pos))
                     {
@@ -66,6 +76,15 @@ namespace CIM6
                     else //update key value
                     {
                         CigaretteNumDict[pos] = num;
+                    }
+
+                    if (!CigaretteNameNum.ContainsKey(name))
+                    {
+                        CigaretteNameNum.Add(name, num);
+                    }
+                    else
+                    {
+                        CigaretteNameNum[name] = num;
                     }
                 }
             }
@@ -415,5 +434,43 @@ namespace CIM6
             }
            
         }
+
+ 
+
+
+        private void reportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
+            string filename = DateTime.Now.ToString("H-dd-MM-yyyy") + ".pdf";
+            PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream(filename, FileMode.Create));
+            doc.Open();
+            
+            PdfPTable table = new PdfPTable(2);
+
+            PdfPCell header = new PdfPCell(new Phrase("This is the report at:  " + DateTime.Now.ToString("H:mm:ss dd/MM/yyyy") + "\n\n"));
+            header.Colspan = 2;
+            header.HorizontalAlignment = 1;
+            table.AddCell(header);
+
+            foreach (var pair in CigaretteNameNum)
+            {
+                Console.WriteLine("CigaretteName = {0}, Num = {1}", pair.Key, pair.Value);
+                table.AddCell(pair.Key);
+                table.AddCell(pair.Value.ToString());
+            }
+ 
+
+            doc.Add(table);
+
+            doc.Close();
+            
+            
+      
+  
+        }
+
+   
+
     }
 }
