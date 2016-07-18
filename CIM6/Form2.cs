@@ -19,6 +19,8 @@ namespace CIM6
         public int labelid { get; private set; }
         public bool savechages { get; set; }
 
+        public const int CigarettePerPage = 24;
+
         public Dictionary<int, string> CigarettePosDict = new Dictionary<int, string>();
         public Dictionary<int, int> CigaretteNumDict = new Dictionary<int, int>();
         public Dictionary<int, int> CigaretteNumDictSave = new Dictionary<int, int>();
@@ -64,8 +66,8 @@ namespace CIM6
                 while (rdr.Read())
                 {
                     // Console.WriteLine("Output is: {0} {1} {2} {3}", rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetInt32(3));
-                    // only get ID > 24
-                    if (rdr.GetInt32(0) <= 24)
+                    // only get ID > CigarettePerPage
+                    if (rdr.GetInt32(0) <= CigarettePerPage)
                     {
                         continue;
                     }
@@ -127,7 +129,7 @@ namespace CIM6
                         if (Int32.TryParse(namestr, out textid))
                         {
                             // Console.WriteLine("label id = {0}", labelid);
-                            CigaretteNumDictSave[textid+24] = Int32.Parse(tb.Text);
+                            CigaretteNumDictSave[textid+CigarettePerPage] = Int32.Parse(tb.Text);
                            // Console.WriteLine("Updated Cigarette Num = {0}", CigaretteNumDictSave[textid]);
 
                         }
@@ -161,8 +163,8 @@ namespace CIM6
                         if (Int32.TryParse(namestr, out textboxid))
                         {
                             // Console.WriteLine("label id = {0}", labelid);
-                            tb.Text = CigaretteNumDict[textboxid+24].ToString();
-                            this.is_shortage(tb, CigaretteNumDict[textboxid+24]);
+                            tb.Text = CigaretteNumDict[textboxid+CigarettePerPage].ToString();
+                            this.is_shortage(tb, CigaretteNumDict[textboxid+CigarettePerPage]);
 
                         }
 
@@ -197,7 +199,7 @@ namespace CIM6
                         if (Int32.TryParse(namestr, out labelid))
                         {
                            // Console.WriteLine("label id = {0}", labelid);
-                            lbl.Text = CigarettePosDict[labelid+24];
+                            lbl.Text = CigarettePosDict[labelid+CigarettePerPage];
             
                         }
                     }
@@ -235,8 +237,8 @@ namespace CIM6
                 while (rdr.Read())
                 {
                     // Console.WriteLine("Output is: {0} {1} {2} {3}", rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetInt32(3));
-                    // only get ID > 24
-                    if (rdr.GetInt32(0) <= 24)
+                    // only get ID > CigarettePerPage
+                    if (rdr.GetInt32(0) <= CigarettePerPage)
                     {
                         continue;
                     }
@@ -446,39 +448,6 @@ namespace CIM6
         }
 
  
-
-
-        private void reportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-           
-            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
-            string filename = DateTime.Now.ToString("H-dd-MM-yyyy") + ".pdf";
-            PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream(filename, FileMode.Create));
-            doc.Open();
-            
-            PdfPTable table = new PdfPTable(2);
-
-            PdfPCell header = new PdfPCell(new Phrase("This is the report at:  " + DateTime.Now.ToString("H:mm:ss dd/MM/yyyy") + "\n\n"));
-            header.Colspan = 2;
-            header.HorizontalAlignment = 1;
-            table.AddCell(header);
-
-            foreach (var pair in CigaretteNameNum)
-            {
-                Console.WriteLine("CigaretteName = {0}, Num = {1}", pair.Key, pair.Value);
-                table.AddCell(pair.Key);
-                table.AddCell(pair.Value.ToString());
-            }
- 
-
-            doc.Add(table);
-
-            doc.Close();
-            
-            
-      
-  
-        }
 
         private void prevPageToolStripMenuItem_Click(object sender, EventArgs e)
         {

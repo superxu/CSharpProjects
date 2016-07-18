@@ -453,6 +453,8 @@ namespace CIM6
             header.HorizontalAlignment = 1;
             table.AddCell(header);
 
+            GetCigaretteNumFromDB();
+
             foreach (var pair in CigaretteNameNum)
             {
                 Console.WriteLine("CigaretteName = {0}, Num = {1}", pair.Key, pair.Value);
