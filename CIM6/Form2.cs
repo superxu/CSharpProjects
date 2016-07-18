@@ -64,6 +64,11 @@ namespace CIM6
                 while (rdr.Read())
                 {
                     // Console.WriteLine("Output is: {0} {1} {2} {3}", rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetInt32(3));
+                    // only get ID > 24
+                    if (rdr.GetInt32(0) <= 24)
+                    {
+                        continue;
+                    }
 
                     pos = rdr.GetInt32(4);
                     num = rdr.GetInt32(3);
@@ -122,7 +127,7 @@ namespace CIM6
                         if (Int32.TryParse(namestr, out textid))
                         {
                             // Console.WriteLine("label id = {0}", labelid);
-                            CigaretteNumDictSave[textid] = Int32.Parse(tb.Text);
+                            CigaretteNumDictSave[textid+24] = Int32.Parse(tb.Text);
                            // Console.WriteLine("Updated Cigarette Num = {0}", CigaretteNumDictSave[textid]);
 
                         }
@@ -156,8 +161,8 @@ namespace CIM6
                         if (Int32.TryParse(namestr, out textboxid))
                         {
                             // Console.WriteLine("label id = {0}", labelid);
-                            tb.Text = CigaretteNumDict[textboxid].ToString();
-                            this.is_shortage(tb, CigaretteNumDict[textboxid]);
+                            tb.Text = CigaretteNumDict[textboxid+24].ToString();
+                            this.is_shortage(tb, CigaretteNumDict[textboxid+24]);
 
                         }
 
@@ -192,7 +197,7 @@ namespace CIM6
                         if (Int32.TryParse(namestr, out labelid))
                         {
                            // Console.WriteLine("label id = {0}", labelid);
-                            lbl.Text = CigarettePosDict[labelid];
+                            lbl.Text = CigarettePosDict[labelid+24];
             
                         }
                     }
@@ -230,7 +235,12 @@ namespace CIM6
                 while (rdr.Read())
                 {
                     // Console.WriteLine("Output is: {0} {1} {2} {3}", rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetInt32(3));
- 
+                    // only get ID > 24
+                    if (rdr.GetInt32(0) <= 24)
+                    {
+                        continue;
+                    }
+
                     pos = rdr.GetInt32(4);
                     cigarettename = rdr.GetString(2);
 
