@@ -470,7 +470,16 @@ namespace CIM6
   
         }
 
-   
+        private void nextPageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+     
+            //every time a lable is clicked, a new form is created???
+            Form2 f2 = new Form2();
+            f2.ShowDialog();
 
+            this.Show();
+
+        }
     }
 }

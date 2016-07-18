@@ -129,6 +129,7 @@
             this.button42 = new System.Windows.Forms.Button();
             this.button44 = new System.Windows.Forms.Button();
             this.button46 = new System.Windows.Forms.Button();
+            this.nextPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -139,7 +140,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.keyboardToolStripMenuItem,
             this.reportToolStripMenuItem,
-            this.saveToolStripMenuItem});
+            this.saveToolStripMenuItem,
+            this.nextPageToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1776, 44);
@@ -1403,6 +1405,14 @@
             this.button46.UseVisualStyleBackColor = true;
             this.button46.Click += new System.EventHandler(this.button_Clicked);
             // 
+            // nextPageToolStripMenuItem
+            // 
+            this.nextPageToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.nextPageToolStripMenuItem.Name = "nextPageToolStripMenuItem";
+            this.nextPageToolStripMenuItem.Size = new System.Drawing.Size(164, 40);
+            this.nextPageToolStripMenuItem.Text = "Next Page";
+            this.nextPageToolStripMenuItem.Click += new System.EventHandler(this.nextPageToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
@@ -1524,6 +1534,7 @@
         private System.Windows.Forms.Button button42;
         private System.Windows.Forms.Button button44;
         private System.Windows.Forms.Button button46;
+        private System.Windows.Forms.ToolStripMenuItem nextPageToolStripMenuItem;
     }
 }
 
