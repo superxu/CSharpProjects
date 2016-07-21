@@ -15,7 +15,7 @@ namespace CIM6
         public EditCigaretteName(Form f)
         {
             InitializeComponent();
-            if (f.Name == "form1")
+            if (f.Name == "Form1")
             {
                 this._f1 = (Form1)f;
                 this.CigaretteID.Text = this._f1.labelid.ToString();
