@@ -10,22 +10,13 @@ namespace CIM6
 
 
         Form1 _f1;
-        Form2 _f2;
-
-        public EditCigaretteName(Form f)
+        public EditCigaretteName(Form1 f)
         {
             InitializeComponent();
-            if (f.Name == "Form1")
-            {
-                this._f1 = (Form1)f;
+   
+                this._f1 = f;
                 this.CigaretteID.Text = this._f1.labelid.ToString();
-            }
-            else
-            {
-                this._f2 = (Form2)f;
-                this.CigaretteID.Text = this._f2.labelid.ToString();
-            }
-
+   
             // 1. set the connection string
             conn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Cigarettes.mdf;Integrated Security=True";
 

@@ -16,7 +16,7 @@ namespace CIM6
 
     public partial class Form1 : Form
     {
-        public int labelid { get; private set; }
+        public int labelid { get;  set; }
         public bool savechages { get; set; }
 
         public Dictionary<int, string> CigarettePosDict = new Dictionary<int, string>();
@@ -134,7 +134,7 @@ namespace CIM6
         }
 
 
-        private void SetTextBoxNum(Control control)
+        protected void SetTextBoxNum(Control control)
         {
 
             int textboxid = 0;
@@ -370,7 +370,7 @@ namespace CIM6
             this.Show();
         }
 
-        private void Form1_FormClosing(Object sender, FormClosingEventArgs e)
+        protected void Form1_FormClosing(Object sender, FormClosingEventArgs e)
         {
             if (!this.savechages)
             {
@@ -472,10 +472,11 @@ namespace CIM6
   
         }
 
-        private void nextPageToolStripMenuItem_Click(object sender, EventArgs e)
+        protected virtual void nextPageToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("Next Page Button Clicked!");
             this.Hide();
-     
+
             //every time a lable is clicked, a new form is created???
             Form2 f2 = new Form2();
             f2.ShowDialog();

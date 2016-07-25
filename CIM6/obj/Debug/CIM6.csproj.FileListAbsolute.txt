@@ -28,4 +28,3 @@ C:\CSharpProjects\CIM6\CIM6\bin\Debug\itextsharp.dll
 C:\CSharpProjects\CIM6\CIM6\bin\Debug\itextsharp.pdfa.dll
 C:\CSharpProjects\CIM6\CIM6\bin\Debug\itextsharp.xtra.dll
 C:\CSharpProjects\CIM6\CIM6\bin\Debug\itextsharp.xml
-C:\CSharpProjects\CIM6\CIM6\obj\Debug\CIM6.Form2.resources
