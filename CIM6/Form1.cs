@@ -19,10 +19,12 @@ namespace CIM6
         public int labelid { get;  set; }
         public bool savechages { get; set; }
 
-        public Dictionary<int, string> CigarettePosDict = new Dictionary<int, string>();
-        public Dictionary<int, int> CigaretteNumDict = new Dictionary<int, int>();
-        public Dictionary<int, int> CigaretteNumDictSave = new Dictionary<int, int>();
-        public Dictionary<string, int> CigaretteNameNum = new Dictionary<string, int>();
+        protected Dictionary<int, string> CigarettePosDict = new Dictionary<int, string>();
+        protected Dictionary<int, int> CigaretteNumDict = new Dictionary<int, int>();
+        protected Dictionary<int, int> CigaretteNumDictSave = new Dictionary<int, int>();
+        protected Dictionary<string, int> CigaretteNameNum = new Dictionary<string, int>();
+
+        protected const int CigarettesPerPage = 24;
 
         public Form1()
         {
@@ -37,7 +39,7 @@ namespace CIM6
 
 
 
-        private void GetCigaretteNumFromDB()
+        protected virtual void GetCigaretteNumFromDB()
         {
 
             SqlDataReader rdr = null;
@@ -105,7 +107,7 @@ namespace CIM6
 
         }
 
-        private void GetTextBoxBum(Control control)
+        protected virtual void GetTextBoxBum(Control control)
         {
             string namestr;
             int textid;
@@ -134,7 +136,7 @@ namespace CIM6
         }
 
 
-        protected void SetTextBoxNum(Control control)
+        protected virtual void SetTextBoxNum(Control control)
         {
 
             int textboxid = 0;
@@ -170,7 +172,7 @@ namespace CIM6
         }
 
 
-        public void SetLabelText(Control control)
+        protected virtual void SetLabelText(Control control)
         {
             
             int labelid = 0;
@@ -204,7 +206,7 @@ namespace CIM6
 
         public SqlConnection conn = new SqlConnection();
 
-        private void GetCigaretteName()
+        protected virtual void GetCigaretteName()
         {
 
             SqlDataReader rdr = null;
@@ -273,7 +275,7 @@ namespace CIM6
         private const int buttonsperrow = 12;
 
 
-        private void is_shortage(TextBox tb, int num)
+        protected void is_shortage(TextBox tb, int num)
         {
             if (num < 5)
             {
@@ -345,11 +347,6 @@ namespace CIM6
                      }
                     
             }
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
 
         }
 
@@ -478,6 +475,7 @@ namespace CIM6
             this.Hide();
 
             //every time a lable is clicked, a new form is created???
+            // Is it ok to instantiate a form2 object here???
             Form2 f2 = new Form2();
             f2.ShowDialog();
 
